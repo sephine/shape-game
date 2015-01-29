@@ -22,6 +22,8 @@ class SpecialPieceSprite: PieceSprite {
             innerSprite = CCSprite.spriteWithImageNamed("WhiteCircle.png") as CCSprite
         case .Square:
             innerSprite = CCSprite.spriteWithImageNamed("WhiteSquare.png") as CCSprite
+        case .Triangle:
+            innerSprite = CCSprite.spriteWithImageNamed("WhiteTriangle.png") as CCSprite
         }
     }
 }

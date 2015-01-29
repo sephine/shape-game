@@ -91,6 +91,13 @@
 		B070C8151A6A57D000FA44A5 /* RedCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = B070C8101A6A57D000FA44A5 /* RedCircle.png */; };
 		B070C8161A6A57D000FA44A5 /* YellowCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = B070C8111A6A57D000FA44A5 /* YellowCircle.png */; };
 		B076201B1A79BB49000CEDE5 /* WhiteCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = B076201A1A79BB49000CEDE5 /* WhiteCircle.png */; };
+		B076201D1A79C47A000CEDE5 /* BlueTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B076201C1A79C47A000CEDE5 /* BlueTriangle.png */; };
+		B07620241A79C488000CEDE5 /* GreenTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B076201E1A79C488000CEDE5 /* GreenTriangle.png */; };
+		B07620251A79C488000CEDE5 /* OrangeTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B076201F1A79C488000CEDE5 /* OrangeTriangle.png */; };
+		B07620261A79C488000CEDE5 /* PurpleTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B07620201A79C488000CEDE5 /* PurpleTriangle.png */; };
+		B07620271A79C488000CEDE5 /* RedTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B07620211A79C488000CEDE5 /* RedTriangle.png */; };
+		B07620281A79C488000CEDE5 /* WhiteTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B07620221A79C488000CEDE5 /* WhiteTriangle.png */; };
+		B07620291A79C488000CEDE5 /* YellowTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B07620231A79C488000CEDE5 /* YellowTriangle.png */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5908188484E7003F4D28 /* iPad-old@2x.png */; };
 		B71F5913188484E7003F4D28 /* iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5909188484E7003F4D28 /* iPad.png */; };
@@ -246,6 +253,13 @@
 		B070C8101A6A57D000FA44A5 /* RedCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedCircle.png; sourceTree = "<group>"; };
 		B070C8111A6A57D000FA44A5 /* YellowCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowCircle.png; sourceTree = "<group>"; };
 		B076201A1A79BB49000CEDE5 /* WhiteCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteCircle.png; sourceTree = "<group>"; };
+		B076201C1A79C47A000CEDE5 /* BlueTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueTriangle.png; sourceTree = "<group>"; };
+		B076201E1A79C488000CEDE5 /* GreenTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenTriangle.png; sourceTree = "<group>"; };
+		B076201F1A79C488000CEDE5 /* OrangeTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrangeTriangle.png; sourceTree = "<group>"; };
+		B07620201A79C488000CEDE5 /* PurpleTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleTriangle.png; sourceTree = "<group>"; };
+		B07620211A79C488000CEDE5 /* RedTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedTriangle.png; sourceTree = "<group>"; };
+		B07620221A79C488000CEDE5 /* WhiteTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteTriangle.png; sourceTree = "<group>"; };
+		B07620231A79C488000CEDE5 /* YellowTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowTriangle.png; sourceTree = "<group>"; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
 		B71F5908188484E7003F4D28 /* iPad-old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old@2x.png"; path = "Icons/iPad-old@2x.png"; sourceTree = "<group>"; };
 		B71F5909188484E7003F4D28 /* iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPad.png; path = Icons/iPad.png; sourceTree = "<group>"; };
@@ -533,6 +547,13 @@
 				B06EB65A1A6E105C0066BA72 /* PurpleSquare.png */,
 				B06EB6591A6E105C0066BA72 /* OrangeSquare.png */,
 				B06EB65C1A6E105C0066BA72 /* WhiteSquare.png */,
+				B076201C1A79C47A000CEDE5 /* BlueTriangle.png */,
+				B07620231A79C488000CEDE5 /* YellowTriangle.png */,
+				B07620211A79C488000CEDE5 /* RedTriangle.png */,
+				B076201E1A79C488000CEDE5 /* GreenTriangle.png */,
+				B07620201A79C488000CEDE5 /* PurpleTriangle.png */,
+				B076201F1A79C488000CEDE5 /* OrangeTriangle.png */,
+				B07620221A79C488000CEDE5 /* WhiteTriangle.png */,
 			);
 			name = Image;
 			sourceTree = "<group>";
@@ -861,12 +882,16 @@
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
 				B070C8141A6A57D000FA44A5 /* PurpleCircle.png in Resources */,
 				B06EB6631A6E105C0066BA72 /* WhiteSquare.png in Resources */,
+				B076201D1A79C47A000CEDE5 /* BlueTriangle.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
+				B07620291A79C488000CEDE5 /* YellowTriangle.png in Resources */,
+				B07620271A79C488000CEDE5 /* RedTriangle.png in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
 				B070C80C1A6A57BA00FA44A5 /* BlueCircle.png in Resources */,
 				B070C8161A6A57D000FA44A5 /* YellowCircle.png in Resources */,
 				B06EB65F1A6E105C0066BA72 /* GreenSquare.png in Resources */,
 				B71F5916188484E7003F4D28 /* iPhone-old@2x.png in Resources */,
+				B07620241A79C488000CEDE5 /* GreenTriangle.png in Resources */,
 				B737893B180761570076A88C /* Published-iOS in Resources */,
 				B06EB6621A6E105C0066BA72 /* RedSquare.png in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
@@ -877,6 +902,9 @@
 				B070C8121A6A57D000FA44A5 /* GreenCircle.png in Resources */,
 				B076201B1A79BB49000CEDE5 /* WhiteCircle.png in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
+				B07620281A79C488000CEDE5 /* WhiteTriangle.png in Resources */,
+				B07620261A79C488000CEDE5 /* PurpleTriangle.png in Resources */,
+				B07620251A79C488000CEDE5 /* OrangeTriangle.png in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,

@@ -49,6 +49,21 @@ class ActivePieceSprite: PieceSprite {
             case .Orange:
                 innerSprite = CCSprite.spriteWithImageNamed("OrangeSquare.png") as CCSprite
             }
+        case .Triangle:
+            switch piece.color {
+            case .Blue:
+                innerSprite = CCSprite.spriteWithImageNamed("BlueTriangle.png") as CCSprite
+            case .Yellow:
+                innerSprite = CCSprite.spriteWithImageNamed("YellowTriangle.png") as CCSprite
+            case .Red:
+                innerSprite = CCSprite.spriteWithImageNamed("RedTriangle.png") as CCSprite
+            case .Green:
+                innerSprite = CCSprite.spriteWithImageNamed("GreenTriangle.png") as CCSprite
+            case .Purple:
+                innerSprite = CCSprite.spriteWithImageNamed("PurpleTriangle.png") as CCSprite
+            case .Orange:
+                innerSprite = CCSprite.spriteWithImageNamed("OrangeTriangle.png") as CCSprite
+            }
         }
     }
 }

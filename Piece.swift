@@ -9,7 +9,7 @@
 import Foundation
 
 enum Shape {
-    case Circle, Square
+    case Circle, Square, Triangle
 }
 
 enum Color {
@@ -19,7 +19,7 @@ enum Color {
 class Piece {
     
     class func createNewPiece() -> Piece {
-        let randomForType = Int(arc4random_uniform(2))
+        let randomForType = Int(arc4random_uniform(3))
         switch randomForType {
         case 0:
             let randomForColor = Int(arc4random_uniform(3))
@@ -31,7 +31,7 @@ class Piece {
             default:
                 return ActivePiece(shape: .Circle, color: .Red)
             }
-        default:
+        case 1:
             let randomForColor = Int(arc4random_uniform(3))
             switch randomForColor {
             case 0:
@@ -40,6 +40,16 @@ class Piece {
                 return ActivePiece(shape: .Square, color: .Yellow)
             default:
                 return ActivePiece(shape: .Square, color: .Red)
+            }
+        default:
+            let randomForColor = Int(arc4random_uniform(3))
+            switch randomForColor {
+            case 0:
+                return ActivePiece(shape: .Triangle, color: .Blue)
+            case 1:
+                return ActivePiece(shape: .Triangle, color: .Yellow)
+            default:
+                return ActivePiece(shape: .Triangle, color: .Red)
             }
         }
     }
