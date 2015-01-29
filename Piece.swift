@@ -8,6 +8,14 @@
 
 import Foundation
 
+enum Shape {
+    case Circle, Square
+}
+
+enum Color {
+    case Blue, Yellow, Red, Green, Purple, Orange
+}
+
 class Piece {
     
     class func createNewPiece() -> Piece {

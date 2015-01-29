@@ -12,7 +12,16 @@ class SpecialPieceSprite: PieceSprite {
     
     init(piece: SpecialPiece) {
         super.init()
-        innerSprite = CCSprite.spriteWithImageNamed("active.png") as CCSprite
+        setInnerSpriteToMatchPiece(piece)
         self.addChild(innerSprite)
+    }
+    
+    private func setInnerSpriteToMatchPiece(piece: SpecialPiece) {
+        switch piece.shape {
+        case .Circle:
+            innerSprite = CCSprite.spriteWithImageNamed("WhiteCircle.png") as CCSprite
+        case .Square:
+            innerSprite = CCSprite.spriteWithImageNamed("WhiteSquare.png") as CCSprite
+        }
     }
 }
