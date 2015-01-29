@@ -98,6 +98,7 @@
 		B07620271A79C488000CEDE5 /* RedTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B07620211A79C488000CEDE5 /* RedTriangle.png */; };
 		B07620281A79C488000CEDE5 /* WhiteTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B07620221A79C488000CEDE5 /* WhiteTriangle.png */; };
 		B07620291A79C488000CEDE5 /* YellowTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B07620231A79C488000CEDE5 /* YellowTriangle.png */; };
+		B076202F1A7AF3CB000CEDE5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B076202E1A7AF3CB000CEDE5 /* Constants.swift */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5908188484E7003F4D28 /* iPad-old@2x.png */; };
 		B71F5913188484E7003F4D28 /* iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5909188484E7003F4D28 /* iPad.png */; };
@@ -260,6 +261,7 @@
 		B07620211A79C488000CEDE5 /* RedTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedTriangle.png; sourceTree = "<group>"; };
 		B07620221A79C488000CEDE5 /* WhiteTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteTriangle.png; sourceTree = "<group>"; };
 		B07620231A79C488000CEDE5 /* YellowTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowTriangle.png; sourceTree = "<group>"; };
+		B076202E1A7AF3CB000CEDE5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
 		B71F5908188484E7003F4D28 /* iPad-old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old@2x.png"; path = "Icons/iPad-old@2x.png"; sourceTree = "<group>"; };
 		B71F5909188484E7003F4D28 /* iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPad.png; path = Icons/iPad.png; sourceTree = "<group>"; };
@@ -571,6 +573,7 @@
 				B070C7F91A6A42C700FA44A5 /* PieceSprite.swift */,
 				B070C7F11A6A42C700FA44A5 /* ActivePieceSprite.swift */,
 				B070C7F31A6A42C700FA44A5 /* SpecialPieceSprite.swift */,
+				B076202E1A7AF3CB000CEDE5 /* Constants.swift */,
 				D352B48019EC608A00829775 /* MetalShaders */,
 			);
 			name = Source;
@@ -1001,6 +1004,7 @@
 				B070C7FC1A6A42C700FA44A5 /* SpecialPiece.swift in Sources */,
 				B070C8031A6A42C700FA44A5 /* PieceSprite.swift in Sources */,
 				B070C7FA1A6A42C700FA44A5 /* ActivePiece.swift in Sources */,
+				B076202F1A7AF3CB000CEDE5 /* Constants.swift in Sources */,
 				B070C7FD1A6A42C700FA44A5 /* SpecialPieceSprite.swift in Sources */,
 				B070C7FF1A6A42C700FA44A5 /* BoardListener.swift in Sources */,
 				B06EB6671A6F4B000066BA72 /* MainScene.swift in Sources */,

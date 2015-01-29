@@ -9,19 +9,16 @@
 import Foundation
 
 class Board {
-    let numberOfRows, numberOfColumns: Int
     var boardLayout: [Piece?]
     var listener: BoardListener?
     
-    init(numberOfRows: Int, numberOfColumns: Int) {
-        self.numberOfRows = numberOfRows
-        self.numberOfColumns = numberOfColumns
-        boardLayout = [Piece?](count: numberOfRows*numberOfColumns, repeatedValue: nil)
+    init() {
+        boardLayout = [Piece?](count: Constants.numberOfRows*Constants.numberOfColumns, repeatedValue: nil)
     }
     
     func fillBoard() {
-        for row in 1...numberOfRows {
-            for column in 1...numberOfColumns {
+        for row in 1...Constants.numberOfRows {
+            for column in 1...Constants.numberOfColumns {
                 let position = BoardPosition(row: row, column: column)
                 let newPiece = Piece.createNewPiece()
                 setPieceAtPosition(position, newPiece: newPiece)
@@ -62,12 +59,12 @@ class Board {
     }
     
     private func getPieceAtPosition(position: BoardPosition) -> Piece {
-        let arrayIndex = (position.row - 1)*numberOfColumns + (position.column - 1)
+        let arrayIndex = (position.row - 1)*Constants.numberOfColumns + (position.column - 1)
         return boardLayout[arrayIndex]!
     }
     
     private func setPieceAtPosition(position: BoardPosition, newPiece: Piece) {
-        let arrayIndex = (position.row - 1)*numberOfColumns + (position.column - 1)
+        let arrayIndex = (position.row - 1)*Constants.numberOfColumns + (position.column - 1)
         boardLayout[arrayIndex] = newPiece
     }
     
@@ -90,7 +87,7 @@ class Board {
     }
     
     private func dropPiecesInColumn(column: Int, lowestNewRow: Int, dropAmount: Int) {
-        for var row = lowestNewRow+dropAmount; row <= numberOfRows; row++ {
+        for var row = lowestNewRow+dropAmount; row <= Constants.numberOfRows; row++ {
             let oldPosition = BoardPosition(row: row, column: column)
             let newPosition = BoardPosition(row: row - dropAmount, column: column)
             let movingPiece = getPieceAtPosition(oldPosition)
@@ -100,7 +97,8 @@ class Board {
         
         //create new pieces for the now empty spots at the top.
         for rowsFromTop in 0...(dropAmount-1) {
-            let emptyPosition = BoardPosition(row: numberOfRows - rowsFromTop, column: column)
+            let emptyPosition = BoardPosition(row: Constants.numberOfRows - rowsFromTop,
+                column: column)
             let newPiece = Piece.createNewPiece()
             setPieceAtPosition(emptyPosition, newPiece: newPiece)
             listener?.pieceCreatedAtPosition(emptyPosition, piece: newPiece, dropAmount: dropAmount)

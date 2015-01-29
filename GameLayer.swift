@@ -7,28 +7,23 @@
 //
 
 import Foundation
-import SpriteKit
 
 class GameLayer: CCNodeColor, BoardListener {
     
     var spriteLayout: [PieceSprite?]
     let board: Board
-    let numberOfRows: Int
-    let numberOfColumns: Int
     var segmentHeight: Double
     var segmentWidth: Double
     var touchStartPosition: BoardPosition?
     
-    init(numberOfRows: Int, numberOfColumns: Int) {
+    override init() {
         
-        self.numberOfRows = numberOfRows
-        self.numberOfColumns = numberOfColumns
-        board = Board(numberOfRows: numberOfRows, numberOfColumns: numberOfColumns)
-        spriteLayout = [PieceSprite?](count: numberOfRows*numberOfColumns, repeatedValue: nil)
+        board = Board()
+        spriteLayout = [PieceSprite?](count: Constants.numberOfRows*Constants.numberOfColumns, repeatedValue: nil)
         
         let size = CCDirector.sharedDirector().viewSize()
-        segmentHeight = Double(ceil(size.height/CGFloat(numberOfRows)*100)/100)
-        segmentWidth = Double(ceil(size.width/CGFloat(numberOfColumns)*100)/100)
+        segmentHeight = Double(ceil(size.height/CGFloat(Constants.numberOfRows)*100)/100)
+        segmentWidth = Double(ceil(size.width/CGFloat(Constants.numberOfColumns)*100)/100)
         let backgroundColor = CCColor.whiteColor()
         super.init(color: backgroundColor, width: GLfloat(size.width), height: GLfloat(size.height))
         board.listener = self
@@ -134,12 +129,12 @@ class GameLayer: CCNodeColor, BoardListener {
     }
     
     private func getSpriteAtPosition(position: BoardPosition) -> PieceSprite? {
-        let arrayIndex = (position.row - 1)*numberOfColumns + (position.column - 1)
+        let arrayIndex = (position.row - 1)*Constants.numberOfColumns + (position.column - 1)
         return spriteLayout[arrayIndex]!
     }
     
     private func setSpriteAtPosition(position: BoardPosition, newSprite: PieceSprite?) {
-        let arrayIndex = (position.row - 1)*numberOfColumns + (position.column - 1)
+        let arrayIndex = (position.row - 1)*Constants.numberOfColumns + (position.column - 1)
         spriteLayout[arrayIndex] = newSprite
         //spriteLayout.insert(newSprite, atIndex: arrayIndex)
     }

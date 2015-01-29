@@ -4,7 +4,7 @@ class GameScene: CCScene {
     override init() {
         super.init()
         
-        let gameLayer = GameLayer(numberOfRows: 9, numberOfColumns: 7)
+        let gameLayer = GameLayer()
         self.addChild(gameLayer, z: 90)
     }
 }

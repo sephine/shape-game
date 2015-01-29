@@ -11,14 +11,6 @@ import Foundation
 class PieceSprite: CCNode {
     
     var innerSprite = CCSprite()
-    /*override var opacity: CGFloat {
-        get {
-            return innerSprite.opacity
-        }
-        set {
-            innerSprite.opacity = newValue
-        }
-    }*/
     
     //should not be called directly, should only be called by subclasses
     override init() {
