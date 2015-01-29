@@ -13,12 +13,12 @@ enum Shape {
 }
 
 enum Color {
-    case White, Blue, Yellow, Red, Green, Purple, Orange
+    case Blue, Yellow, Red, Green, Purple, Orange
 }
 
 class ActivePiece: Piece {
     let shape: Shape
-    var color: Color
+    let color: Color
     
     init(shape: Shape, color: Color) {
         self.shape = shape
@@ -27,84 +27,90 @@ class ActivePiece: Piece {
         super.init()
     }
     
-    override func isComplete() -> Bool {
-        return self.color == .White
+    override func canBeCombinedWithPiece(piece: Piece) -> Bool {
+        if piece is SpecialPiece {
+            return true
+        } else if piece is ActivePiece {
+            return getResultIfPossibleWhenCombinedWithActivePiece(piece as ActivePiece).isPossible
+        }
+        return false
     }
     
-    func canBeCombinedWithActivePiece(piece: ActivePiece) -> Bool {
-        return findColorIfPossibleWhenCombinedWithNewPiece(piece).isPossible
+    override func getResultWhencombinedWithPiece(piece: Piece) -> Piece {
+        if piece is SpecialPiece {
+            if shape == .Circle {
+                return ActivePiece(shape: .Square, color: self.color)
+            }
+            return ActivePiece(shape: .Circle, color: self.color)
+        }
+        assert(piece is ActivePiece, "These pieces cannot be combined, before calling this method call canBeCombinedWithActivePiece to check.")
+        let isPossibleAndResult = getResultIfPossibleWhenCombinedWithActivePiece(piece as ActivePiece)
+        assert(isPossibleAndResult.isPossible, "These pieces cannot be combined, before calling this method call canBeCombinedWithActivePiece to check.")
+            
+        return isPossibleAndResult.result!
     }
     
-    func combineWithActivePiece(piece: ActivePiece) {
-        let isPossibleAndColor = findColorIfPossibleWhenCombinedWithNewPiece(piece)
-        assert(isPossibleAndColor.isPossible, "These pieces cannot be combined, before calling this method call canBeCombinedWithActivePiece to check.")
-        
-        color = isPossibleAndColor.newColor
-    }
-    
-    private func findColorIfPossibleWhenCombinedWithNewPiece(piece: ActivePiece) ->
-        (isPossible: Bool, newColor: Color) {
+    private func getResultIfPossibleWhenCombinedWithActivePiece(piece: ActivePiece) ->
+        (isPossible: Bool, result: Piece?) {
         
         if self.shape != piece.shape {
-            return (isPossible: false, newColor: self.color)
+            return (isPossible: false, result: nil)
         }
         
         switch self.color {
-        case .White:
-            return (isPossible: false, newColor: .White)
         case .Blue:
             switch piece.color {
             case .Yellow:
-                return (isPossible: true, newColor: .Green)
+                return (isPossible: true, result: ActivePiece(shape: self.shape, color: .Green))
             case .Red:
-                return (isPossible: true, newColor: .Purple)
+                return (isPossible: true, result: ActivePiece(shape: self.shape, color: .Purple))
             case .Orange:
-                return (isPossible: true, newColor: .White)
+                return (isPossible: true, result: SpecialPiece())
             default:
-                return (isPossible: false, newColor: .Blue)
+                return (isPossible: false, result: nil)
             }
         case .Yellow:
             switch piece.color {
             case .Blue:
-                return (isPossible: true, newColor: .Green)
+                return (isPossible: true, result: ActivePiece(shape: self.shape, color: .Green))
             case .Red:
-                return (isPossible: true, newColor: .Orange)
+                return (isPossible: true, result: ActivePiece(shape: self.shape, color: .Orange))
             case .Purple:
-                return (isPossible: true, newColor: .White)
+                return (isPossible: true, result: SpecialPiece())
             default:
-                return (isPossible: false, newColor: .Yellow)
+                return (isPossible: false, result: nil)
             }
         case .Red:
             switch piece.color {
             case .Blue:
-                return (isPossible: true, newColor: .Purple)
+                return (isPossible: true, result: ActivePiece(shape: self.shape, color: .Purple))
             case .Yellow:
-                return (isPossible: true, newColor: .Orange)
+                return (isPossible: true, result: ActivePiece(shape: self.shape, color: .Orange))
             case .Green:
-                return (isPossible: true, newColor: .White)
+                return (isPossible: true, result: SpecialPiece())
             default:
-                return (isPossible: false, newColor: .Red)
+                return (isPossible: false, result: nil)
             }
         case .Green:
             switch piece.color {
             case .Red:
-                return (isPossible: true, newColor: .White)
+                return (isPossible: true, result: SpecialPiece())
             default:
-                return (isPossible: false, newColor: .Green)
+                return (isPossible: false, result: nil)
             }
         case .Purple:
             switch piece.color {
             case .Yellow:
-                return (isPossible: true, newColor: .White)
+                return (isPossible: true, result: SpecialPiece())
             default:
-                return (isPossible: false, newColor: .Purple)
+                return (isPossible: false, result: nil)
             }
         case .Orange:
             switch piece.color {
             case .Blue:
-                return (isPossible: true, newColor: .White)
+                return (isPossible: true, result: SpecialPiece())
             default:
-                return (isPossible: false, newColor: .Orange)
+                return (isPossible: false, result: nil)
             }
         }
     }

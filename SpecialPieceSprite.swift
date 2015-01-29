@@ -8,12 +8,11 @@
 
 import Foundation
 
-class BlockPieceSprite: PieceSprite {
+class SpecialPieceSprite: PieceSprite {
     
-    var sprite = CCSprite.spriteWithImageNamed("active.png") as CCSprite
-    
-    init(piece: BlockPiece) {
+    init(piece: SpecialPiece) {
         super.init()
-        self.addChild(sprite)
+        innerSprite = CCSprite.spriteWithImageNamed("active.png") as CCSprite
+        self.addChild(innerSprite)
     }
 }

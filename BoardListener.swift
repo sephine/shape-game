@@ -10,7 +10,6 @@ import Foundation
 
 protocol BoardListener {
     func pieceCreatedAtPosition(position: BoardPosition, piece: Piece, dropAmount: Int)
-    func pieceDeletedAtPosition(position: BoardPosition)
     func pieceMoved(#oldPosition: BoardPosition, newPosition: BoardPosition)
-    func pieceColorChangedAtPosition(position: BoardPosition, piece: Piece)
+    func pieceMovedAndNewPieceCreated(#oldPosition: BoardPosition, newPosition: BoardPosition, newPiece: Piece)
 }

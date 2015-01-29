@@ -75,11 +75,6 @@ class GameLayer: CCNodeColor, BoardListener {
         let endPosition = BoardPosition(row: endRow, column: endColumn)
         
         if board.canCombinePieceAtStartPositionIntoPieceAtEndPosition(startPosition: touchStartPosition!, endPosition: endPosition) {
-            //the sprite in the start position does not actually move in the model it is just deleted but the animation will appear like it has moved and then been deleted.
-            let movingSprite = getSpriteAtPosition(touchStartPosition!)!
-            let action = CCActionMoveTo.actionWithDuration(0.5, position: getViewPositionFromBoardPosition(endPosition)) as CCActionFiniteTime
-            ActionManager.sharedInstance.addAction(movingSprite, action: action, isAsync: true)
-            
             board.combinePieceAtStartPositionIntoPieceAtEndPosition(startPosition: touchStartPosition!, endPosition: endPosition)
         }
     }
@@ -99,12 +94,6 @@ class GameLayer: CCNodeColor, BoardListener {
         }
     }
     
-    func pieceDeletedAtPosition(position: BoardPosition) {
-        let removedSprite = getSpriteAtPosition(position)!
-        let action = CCActionSequence.actionOne(CCActionFadeOut.actionWithDuration(0.01) as CCActionFiniteTime, two: CCActionRemove.action() as CCActionFiniteTime) as CCActionFiniteTime
-        ActionManager.sharedInstance.addAction(removedSprite, action: action, isAsync: true)
-        setSpriteAtPosition(position, newSprite: nil)
-    }
     
     //any moves given will be animated simulaneously, otherwise seperate calls result in each not being animated until the last is finished.
     func pieceMoved(#oldPosition: BoardPosition, newPosition: BoardPosition) {
@@ -117,15 +106,31 @@ class GameLayer: CCNodeColor, BoardListener {
         //movingSprite.position = getViewPositionFromBoardPosition(newPosition)
     }
     
-    func pieceColorChangedAtPosition(position: BoardPosition, piece: Piece) {
-        let changingSprite = getSpriteAtPosition(position)!
-
-        let block = CCActionCallBlock.actionWithBlock({ () -> Void in
-            changingSprite.changeColorToColorOfPiece(piece)
-        }) as CCActionFiniteTime
-        let action = CCActionSequence.actionOne(CCActionDelay.actionWithDuration(0.01) as CCActionFiniteTime, two: block) as CCActionFiniteTime
-        ActionManager.sharedInstance.addAction(changingSprite, action: action, isAsync: true)
-        //changingSprite.changeColorToColorOfPiece(piece)
+    func pieceMovedAndNewPieceCreated(#oldPosition: BoardPosition, newPosition: BoardPosition, newPiece: Piece) {
+        let movingSprite = getSpriteAtPosition(oldPosition)!
+        let stationarySprite = getSpriteAtPosition(newPosition)!
+        let newSprite = PieceSprite.createNewSpriteFromPiece(newPiece) as PieceSprite
+        newSprite.position = stationarySprite.position
+        newSprite.opacity = 0
+        self.addChild(newSprite)
+        setSpriteAtPosition(oldPosition, newSprite: nil)
+        setSpriteAtPosition(newPosition, newSprite: newSprite)
+        
+        //move sprite onto other sprite
+        movingSprite.zOrder = 100
+        let movingAction = CCActionMoveTo.actionWithDuration(0.25, position: getViewPositionFromBoardPosition(newPosition)) as CCActionFiniteTime
+        ActionManager.sharedInstance.addAction(movingSprite, action: movingAction, isAsync: true)
+        
+        //remove hidden sprite
+        let removeAction = CCActionSequence.actionOne(CCActionFadeOut.actionWithDuration(0.001) as CCActionFiniteTime, two: CCActionRemove.action() as CCActionFiniteTime) as CCActionFiniteTime
+        ActionManager.sharedInstance.addAction(stationarySprite, action: removeAction, isAsync: true)
+        
+        //fade the remaining sprite out and the new one in
+        let fadeOutAction = CCActionSequence.actionOne(CCActionFadeOut.actionWithDuration(0.125) as CCActionFiniteTime, two: CCActionRemove.action() as CCActionFiniteTime) as CCActionFiniteTime
+        ActionManager.sharedInstance.addAction(movingSprite, action: fadeOutAction, isAsync: true)
+        
+        let fadeInAction = CCActionFadeIn.actionWithDuration(0.125) as CCActionFiniteTime
+        ActionManager.sharedInstance.addAction(newSprite, action: fadeInAction, isAsync: true)
     }
     
     private func getSpriteAtPosition(position: BoardPosition) -> PieceSprite? {

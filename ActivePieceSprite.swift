@@ -11,57 +11,43 @@ import SpriteKit
 
 class ActivePieceSprite: PieceSprite {
     
-    var sprite: CCSprite {
-        didSet {
-            oldValue.removeFromParent()
-            self.addChild(sprite)
-        }
-    }
-    //CCSprite.spriteWithImageNamed("EmptyCircle.png") as CCSprite
-    
     init(piece: ActivePiece) {
-        sprite = CCSprite()
         super.init()
-        changeColorToColorOfPiece(piece)
+        setInnerSpriteToMatchPiece(piece)
+        self.addChild(innerSprite)
     }
     
-    override func changeColorToColorOfPiece(piece: Piece) {
-        assert(piece is ActivePiece, "Requests should only be made to change the color of ActivePieces")
-        let activePiece = piece as ActivePiece
-        switch activePiece.shape {
+    private func setInnerSpriteToMatchPiece(piece: ActivePiece) {
+        switch piece.shape {
         case .Circle:
-            switch activePiece.color {
-            case .White:
-                sprite = CCSprite.spriteWithImageNamed("EmptyCircle.png") as CCSprite
+            switch piece.color {
             case .Blue:
-                sprite = CCSprite.spriteWithImageNamed("BlueCircle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("BlueCircle.png") as CCSprite
             case .Yellow:
-                sprite = CCSprite.spriteWithImageNamed("YellowCircle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("YellowCircle.png") as CCSprite
             case .Red:
-                sprite = CCSprite.spriteWithImageNamed("RedCircle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("RedCircle.png") as CCSprite
             case .Green:
-                sprite = CCSprite.spriteWithImageNamed("GreenCircle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("GreenCircle.png") as CCSprite
             case .Purple:
-                sprite = CCSprite.spriteWithImageNamed("PurpleCircle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("PurpleCircle.png") as CCSprite
             case .Orange:
-                sprite = CCSprite.spriteWithImageNamed("OrangeCircle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("OrangeCircle.png") as CCSprite
             }
         case .Square:
-            switch activePiece.color {
-            case .White:
-                sprite = CCSprite.spriteWithImageNamed("WhiteSquare.png") as CCSprite
+            switch piece.color {
             case .Blue:
-                sprite = CCSprite.spriteWithImageNamed("BlueSquare.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("BlueSquare.png") as CCSprite
             case .Yellow:
-                sprite = CCSprite.spriteWithImageNamed("YellowSquare.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("YellowSquare.png") as CCSprite
             case .Red:
-                sprite = CCSprite.spriteWithImageNamed("RedSquare.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("RedSquare.png") as CCSprite
             case .Green:
-                sprite = CCSprite.spriteWithImageNamed("GreenSquare.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("GreenSquare.png") as CCSprite
             case .Purple:
-                sprite = CCSprite.spriteWithImageNamed("PurpleSquare.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("PurpleSquare.png") as CCSprite
             case .Orange:
-                sprite = CCSprite.spriteWithImageNamed("OrangeSquare.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("OrangeSquare.png") as CCSprite
             }
         }
     }

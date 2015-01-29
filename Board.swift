@@ -48,21 +48,15 @@ class Board {
         assert(canCombinePieceAtStartPositionIntoPieceAtEndPosition(startPosition: startPosition, endPosition: endPosition), "This move is illegal, call canCombinePieceAtStartPositionIntoPieceAtEndPosition to check if a move is possible first.")
         
         let removedPiece = getPieceAtPosition(startPosition)
-        let remainingPiece = getPieceAtPosition(endPosition)
+        let pieceToBeAltered = getPieceAtPosition(endPosition)
         
         //note no pieces are actually moved though there may be a graphic showing movement.
-        remainingPiece.combineWithPiece(removedPiece)
-        listener?.pieceColorChangedAtPosition(endPosition, piece: remainingPiece)
+        let alteredPiece = pieceToBeAltered.getResultWhencombinedWithPiece(removedPiece)
+        setPieceAtPosition(endPosition, newPiece: alteredPiece)
+        listener?.pieceMovedAndNewPieceCreated(oldPosition: startPosition, newPosition: endPosition, newPiece: alteredPiece)
         
         //after the pieces are combined the location of the removed piece will be empty.
         var emptyPositions = [startPosition]
-        listener?.pieceDeletedAtPosition(startPosition)
-        
-        //check if this move has caused the stationary piece to be completed (and so emptied)
-        if remainingPiece.isComplete() {
-            emptyPositions.append(endPosition)
-            listener?.pieceDeletedAtPosition(endPosition)
-        }
         
         adjustForRemovedPiecesAtPositions(emptyPositions)
     }
@@ -74,10 +68,10 @@ class Board {
     
     private func setPieceAtPosition(position: BoardPosition, newPiece: Piece) {
         let arrayIndex = (position.row - 1)*numberOfColumns + (position.column - 1)
-        //boardLayout.insert(newPiece, atIndex: arrayIndex)
         boardLayout[arrayIndex] = newPiece
     }
     
+    //it is currently only possible based on the game mechanics to have one position emptied at once, however I have left this function capable of handling 2 removals at once in case the mechanics change again.
     private func adjustForRemovedPiecesAtPositions(emptyPositions: [BoardPosition]) {
         //array must contain one or two positions
         assert(emptyPositions.count == 1 || emptyPositions.count == 2, "the empty positions array should only ever contain one or two elements")
@@ -92,36 +86,6 @@ class Board {
             dropPiecesInColumn(emptyPositions[1].column, lowestNewRow: emptyPositions[1].row, dropAmount: 1)
         } else {
             dropPiecesInColumn(emptyPositions[0].column, lowestNewRow: emptyPositions[0].row, dropAmount: 1)
-        }
-        
-        //check if the board rearrangement has led to complete block rows
-        checkForCompletedBlockRows()
-    }
-    
-    private func checkForCompletedBlockRows() {
-        for row in 1...numberOfRows {
-            var allBlocks = true
-            for column in 1...numberOfColumns {
-                let currentPiece = getPieceAtPosition(BoardPosition(row: row, column: column))
-                if !currentPiece.isABlock() {
-                    allBlocks = false
-                    break
-                }
-            }
-            if allBlocks {
-                deleteRow(row)
-            }
-        }
-    }
-    
-    private func deleteRow(row: Int) {
-        //pieces will automatically be removed from the model when the pieces above are dropped down and replace them, but the listener needs to explicitly know beforehand.
-        for column in 1...numberOfColumns {
-            listener?.pieceDeletedAtPosition(BoardPosition(row: row, column: column))
-        }
-        
-        for column in 1...numberOfColumns {
-            dropPiecesInColumn(column, lowestNewRow: row, dropAmount: 1)
         }
     }
     

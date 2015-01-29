@@ -9,19 +9,27 @@
 import Foundation
 
 class PieceSprite: CCNode {
+    
+    var innerSprite = CCSprite()
+    /*override var opacity: CGFloat {
+        get {
+            return innerSprite.opacity
+        }
+        set {
+            innerSprite.opacity = newValue
+        }
+    }*/
+    
+    //should not be called directly, should only be called by subclasses
+    override init() {
+        super.init()
+        self.cascadeOpacityEnabled = true
+    }
 
     class func createNewSpriteFromPiece(piece: Piece) -> PieceSprite {
         if piece is ActivePiece {
             return ActivePieceSprite(piece: piece as ActivePiece)
         }
-        return BlockPieceSprite(piece: piece as BlockPiece)
+        return SpecialPieceSprite(piece: piece as SpecialPiece)
     }
-    
-    func changeColorToColorOfPiece(piece: Piece) {
-        //this method only has an effect for ActivePieceSprites where it has been overwritten.
-    }
-    
-    //func pieceDeleted() {
-    //    self.removeFromParent()
-    //}
 }
