@@ -8,15 +8,15 @@
 
 import Foundation
 
-enum Shape {
+enum Shape: Int {
     case Circle, Square, Triangle
 }
 
-enum Color {
+enum Color: Int {
     case Blue, Yellow, Red, Green, Purple, Orange
 }
 
-class Piece {
+class Piece: NSObject {
     
     class func createNewPiece() -> Piece {
         let randomForType = Int(arc4random_uniform(3))

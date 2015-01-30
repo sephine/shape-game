@@ -11,4 +11,9 @@ import Foundation
 struct Constants {
     static let numberOfRows = 9
     static let numberOfColumns = 7
+    static let gameDataBoardLayoutKey = "gameDataBoardLayout"
+    static let gameDataKey = "gameData"
+    static let activePieceShapeKey = "activePieceShape"
+    static let activePieceColorKey = "activePieceColor"
+    static let specialPieceShapeKey = "specialPieceShape"
 }

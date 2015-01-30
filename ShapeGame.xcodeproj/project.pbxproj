@@ -99,6 +99,7 @@
 		B07620281A79C488000CEDE5 /* WhiteTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B07620221A79C488000CEDE5 /* WhiteTriangle.png */; };
 		B07620291A79C488000CEDE5 /* YellowTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B07620231A79C488000CEDE5 /* YellowTriangle.png */; };
 		B076202F1A7AF3CB000CEDE5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B076202E1A7AF3CB000CEDE5 /* Constants.swift */; };
+		B07620311A7AF807000CEDE5 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07620301A7AF807000CEDE5 /* GameData.swift */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5908188484E7003F4D28 /* iPad-old@2x.png */; };
 		B71F5913188484E7003F4D28 /* iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5909188484E7003F4D28 /* iPad.png */; };
@@ -262,6 +263,7 @@
 		B07620221A79C488000CEDE5 /* WhiteTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteTriangle.png; sourceTree = "<group>"; };
 		B07620231A79C488000CEDE5 /* YellowTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowTriangle.png; sourceTree = "<group>"; };
 		B076202E1A7AF3CB000CEDE5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B07620301A7AF807000CEDE5 /* GameData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
 		B71F5908188484E7003F4D28 /* iPad-old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old@2x.png"; path = "Icons/iPad-old@2x.png"; sourceTree = "<group>"; };
 		B71F5909188484E7003F4D28 /* iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPad.png; path = Icons/iPad.png; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 				B070C7F81A6A42C700FA44A5 /* Piece.swift */,
 				B070C7F01A6A42C700FA44A5 /* ActivePiece.swift */,
 				B070C7F21A6A42C700FA44A5 /* SpecialPiece.swift */,
+				B07620301A7AF807000CEDE5 /* GameData.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1002,6 +1005,7 @@
 				B070C8001A6A42C700FA44A5 /* BoardPosition.swift in Sources */,
 				7A046D7919E84ED5004C4763 /* GameScene.swift in Sources */,
 				B070C7FC1A6A42C700FA44A5 /* SpecialPiece.swift in Sources */,
+				B07620311A7AF807000CEDE5 /* GameData.swift in Sources */,
 				B070C8031A6A42C700FA44A5 /* PieceSprite.swift in Sources */,
 				B070C7FA1A6A42C700FA44A5 /* ActivePiece.swift in Sources */,
 				B076202F1A7AF3CB000CEDE5 /* Constants.swift in Sources */,

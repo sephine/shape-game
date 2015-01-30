@@ -8,12 +8,21 @@
 
 import Foundation
 
-class SpecialPiece: Piece {
+class SpecialPiece: Piece, NSCoding {
     let shape: Shape
     
     init(shape: Shape) {
         self.shape = shape
         super.init()
+    }
+    
+    required init(coder: NSCoder) {
+        self.shape = Shape(rawValue: coder.decodeIntegerForKey(Constants.specialPieceShapeKey))!
+        super.init()
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeInteger(shape.rawValue, forKey: Constants.specialPieceShapeKey)
     }
     
     override func canBeCombinedWithPiece(piece: Piece) -> Bool {

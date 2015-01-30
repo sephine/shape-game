@@ -9,20 +9,38 @@
 import Foundation
 
 class Board {
-    var boardLayout: [Piece?]
+    var data: GameData
     var listener: BoardListener?
     
-    init() {
-        boardLayout = [Piece?](count: Constants.numberOfRows*Constants.numberOfColumns, repeatedValue: nil)
+    init(listener: BoardListener) {
+        self.listener = listener
+        data = GameData.sharedInstance
+        if data.boardLayout.isEmpty {
+            createBoard()
+        } else {
+            loadBoard()
+        }
     }
     
-    func fillBoard() {
+    private func createBoard() {
+        var newBoardLayout = [Piece]()
         for row in 1...Constants.numberOfRows {
             for column in 1...Constants.numberOfColumns {
                 let position = BoardPosition(row: row, column: column)
                 let newPiece = Piece.createNewPiece()
-                setPieceAtPosition(position, newPiece: newPiece)
+                newBoardLayout.append(newPiece)
                 listener?.pieceCreatedAtPosition(position, piece: newPiece, dropAmount: 0)
+            }
+        }
+        data.boardLayout = newBoardLayout
+    }
+    
+    private func loadBoard() {
+        for row in 1...Constants.numberOfRows {
+            for column in 1...Constants.numberOfColumns {
+                let position = BoardPosition(row: row, column: column)
+                let currentPiece = getPieceAtPosition(position)
+                listener?.pieceCreatedAtPosition(position, piece: currentPiece, dropAmount: 0)
             }
         }
     }
@@ -56,16 +74,18 @@ class Board {
         var emptyPositions = [startPosition]
         
         adjustForRemovedPiecesAtPositions(emptyPositions)
+        
+        data.save()
     }
     
     private func getPieceAtPosition(position: BoardPosition) -> Piece {
         let arrayIndex = (position.row - 1)*Constants.numberOfColumns + (position.column - 1)
-        return boardLayout[arrayIndex]!
+        return data.boardLayout[arrayIndex]
     }
     
     private func setPieceAtPosition(position: BoardPosition, newPiece: Piece) {
         let arrayIndex = (position.row - 1)*Constants.numberOfColumns + (position.column - 1)
-        boardLayout[arrayIndex] = newPiece
+        data.boardLayout[arrayIndex] = newPiece
     }
     
     //it is currently only possible based on the game mechanics to have one position emptied at once, however I have left this function capable of handling 2 removals at once in case the mechanics change again.

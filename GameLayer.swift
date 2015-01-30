@@ -11,14 +11,13 @@ import Foundation
 class GameLayer: CCNodeColor, BoardListener {
     
     var spriteLayout: [PieceSprite?]
-    let board: Board
+    let board: Board!
     var segmentHeight: Double
     var segmentWidth: Double
     var touchStartPosition: BoardPosition?
     
     override init() {
         
-        board = Board()
         spriteLayout = [PieceSprite?](count: Constants.numberOfRows*Constants.numberOfColumns, repeatedValue: nil)
         
         let size = CCDirector.sharedDirector().viewSize()
@@ -26,7 +25,6 @@ class GameLayer: CCNodeColor, BoardListener {
         segmentWidth = Double(ceil(size.width/CGFloat(Constants.numberOfColumns)*100)/100)
         let backgroundColor = CCColor.whiteColor()
         super.init(color: backgroundColor, width: GLfloat(size.width), height: GLfloat(size.height))
-        board.listener = self
         
         self.contentSize = size
         self.userInteractionEnabled = true
@@ -34,7 +32,7 @@ class GameLayer: CCNodeColor, BoardListener {
         //add so that the update method in ActionManager is called
         self.addChild(ActionManager.sharedInstance)
         
-        startNewGame()
+        board = Board(listener: self)
     }
     
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
@@ -72,10 +70,6 @@ class GameLayer: CCNodeColor, BoardListener {
         if board.canCombinePieceAtStartPositionIntoPieceAtEndPosition(startPosition: touchStartPosition!, endPosition: endPosition) {
             board.combinePieceAtStartPositionIntoPieceAtEndPosition(startPosition: touchStartPosition!, endPosition: endPosition)
         }
-    }
-    
-    func startNewGame() {
-        board.fillBoard()
     }
     
     func pieceCreatedAtPosition(position: BoardPosition, piece: Piece, dropAmount: Int) {

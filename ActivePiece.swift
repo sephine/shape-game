@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ActivePiece: Piece {
+class ActivePiece: Piece, NSCoding {
     let shape: Shape
     let color: Color
     
@@ -16,6 +16,17 @@ class ActivePiece: Piece {
         self.shape = shape
         self.color = color
         super.init()
+    }
+    
+    required init(coder: NSCoder) {
+        self.shape = Shape(rawValue: coder.decodeIntegerForKey(Constants.activePieceShapeKey))!
+        self.color = Color(rawValue: coder.decodeIntegerForKey(Constants.activePieceColorKey))!
+        super.init()
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeInteger(shape.rawValue, forKey: Constants.activePieceShapeKey)
+        aCoder.encodeInteger(color.rawValue, forKey: Constants.activePieceColorKey)
     }
     
     override func canBeCombinedWithPiece(piece: Piece) -> Bool {
