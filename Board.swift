@@ -22,6 +22,20 @@ class Board {
         }
     }
     
+    func resetBoard() {
+        for row in 1...Constants.numberOfRows {
+            for column in 1...Constants.numberOfColumns {
+                let position = BoardPosition(row: row, column: column)
+                listener?.pieceDeletedAtPosition(position)
+                let newPiece = Piece.createNewPiece()
+                setPieceAtPosition(position, newPiece: newPiece)
+                listener?.pieceCreatedAtPosition(position, piece: newPiece, dropAmount: 0)
+            }
+        }
+        data.score = 0
+        data.save()
+    }
+    
     private func createBoard() {
         var newBoardLayout = [Piece]()
         for row in 1...Constants.numberOfRows {
@@ -33,6 +47,8 @@ class Board {
             }
         }
         data.boardLayout = newBoardLayout
+        data.score = 0
+        data.save()
     }
     
     private func loadBoard() {
@@ -45,8 +61,10 @@ class Board {
         }
     }
     
+    
+    
     func canCombinePieceAtStartPositionIntoPieceAtEndPosition(#startPosition: BoardPosition, endPosition: BoardPosition) -> Bool {
-        //end position must be adjacent to start. We do not have to worry about being given illegal row or column numbers, this is handled by BoardPosition.
+        //TODO might need to check maximums now
         if (startPosition.row == endPosition.row &&
             abs(startPosition.column - endPosition.column) == 1) ||
             (startPosition.column == endPosition.column &&
@@ -70,12 +88,18 @@ class Board {
         setPieceAtPosition(endPosition, newPiece: alteredPiece)
         listener?.pieceMovedAndNewPieceCreated(oldPosition: startPosition, newPosition: endPosition, newPiece: alteredPiece)
         
+        data.score += alteredPiece.getScoreValue()
+        
         //after the pieces are combined the location of the removed piece will be empty.
         var emptyPositions = [startPosition]
         
         adjustForRemovedPiecesAtPositions(emptyPositions)
         
         data.save()
+        
+        if !possibleMovesExist() {
+            listener?.gameOver()
+        }
     }
     
     private func getPieceAtPosition(position: BoardPosition) -> Piece {
@@ -124,4 +148,22 @@ class Board {
             listener?.pieceCreatedAtPosition(emptyPosition, piece: newPiece, dropAmount: dropAmount)
         }
     }
+    
+    private func possibleMovesExist() -> Bool {
+        for row in 1...Constants.numberOfRows {
+            for column in 1...Constants.numberOfColumns {
+                if column < Constants.numberOfColumns &&
+                    canCombinePieceAtStartPositionIntoPieceAtEndPosition(startPosition: BoardPosition(row: row, column: column), endPosition: BoardPosition(row: row, column: column+1)) {
+                    return true
+                }
+                if row < Constants.numberOfRows &&
+                    canCombinePieceAtStartPositionIntoPieceAtEndPosition(startPosition: BoardPosition(row: row, column: column), endPosition: BoardPosition(row: row+1, column: column)) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    //TODO showing possible moves
 }

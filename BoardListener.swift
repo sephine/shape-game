@@ -12,4 +12,6 @@ protocol BoardListener {
     func pieceCreatedAtPosition(position: BoardPosition, piece: Piece, dropAmount: Int)
     func pieceMoved(#oldPosition: BoardPosition, newPosition: BoardPosition)
     func pieceMovedAndNewPieceCreated(#oldPosition: BoardPosition, newPosition: BoardPosition, newPiece: Piece)
+    func pieceDeletedAtPosition(position: BoardPosition)
+    func gameOver()
 }

@@ -50,6 +50,10 @@ class ActivePiece: Piece, NSCoding {
         return isPossibleAndResult.result!
     }
     
+    override func getScoreValue() -> Int {
+            return 10
+    }
+    
     private func getResultIfPossibleWhenCombinedWithActivePiece(piece: ActivePiece) ->
         (isPossible: Bool, result: Piece?) {
         

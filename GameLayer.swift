@@ -16,14 +16,14 @@ class GameLayer: CCNodeColor, BoardListener {
     var segmentWidth: Double
     var touchStartPosition: BoardPosition?
     
-    override init() {
+    init(size: CGSize) {
         
         spriteLayout = [PieceSprite?](count: Constants.numberOfRows*Constants.numberOfColumns, repeatedValue: nil)
         
-        let size = CCDirector.sharedDirector().viewSize()
+        //let size = CCDirector.sharedDirector().viewSize()
         segmentHeight = Double(ceil(size.height/CGFloat(Constants.numberOfRows)*100)/100)
         segmentWidth = Double(ceil(size.width/CGFloat(Constants.numberOfColumns)*100)/100)
-        let backgroundColor = CCColor.whiteColor()
+        let backgroundColor = CCColor.grayColor()
         super.init(color: backgroundColor, width: GLfloat(size.width), height: GLfloat(size.height))
         
         self.contentSize = size
@@ -37,10 +37,18 @@ class GameLayer: CCNodeColor, BoardListener {
     
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         let location = touch.locationInNode(self)
-        touchStartPosition = getBoardPositionFromViewPosition(location)
+        let position = getBoardPositionFromViewPosition(location)
+        if boardPositionIsValid(position) {
+            touchStartPosition = getBoardPositionFromViewPosition(location)
+        } else {
+            touchStartPosition = nil
+        }
     }
     
     override func touchEnded(touch: CCTouch!, withEvent event: CCTouchEvent!) {
+        if touchStartPosition == nil {
+            return
+        }
         let location = touch.locationInNode(self)
         let touchPosition = getBoardPositionFromViewPosition(location)
         var endRow, endColumn: Int
@@ -67,9 +75,24 @@ class GameLayer: CCNodeColor, BoardListener {
         }
         let endPosition = BoardPosition(row: endRow, column: endColumn)
         
-        if board.canCombinePieceAtStartPositionIntoPieceAtEndPosition(startPosition: touchStartPosition!, endPosition: endPosition) {
+        if boardPositionIsValid(endPosition) &&
+            board.canCombinePieceAtStartPositionIntoPieceAtEndPosition(startPosition: touchStartPosition!, endPosition: endPosition) {
             board.combinePieceAtStartPositionIntoPieceAtEndPosition(startPosition: touchStartPosition!, endPosition: endPosition)
         }
+    }
+    
+    func resetGame() {
+        board.resetBoard()
+    }
+    
+    func gameOver() {
+        
+        let action = CCActionCallBlock.actionWithBlock({
+            let scene = CCDirector.sharedDirector().runningScene as GameScene
+            scene.addMenuLayer(true)
+        }) as CCActionFiniteTime
+        
+        ActionManager.sharedInstance.addAction(nil, action: action, isAsync: true)
     }
     
     func pieceCreatedAtPosition(position: BoardPosition, piece: Piece, dropAmount: Int) {
@@ -83,7 +106,6 @@ class GameLayer: CCNodeColor, BoardListener {
         }
     }
     
-    
     //any moves given will be animated simulaneously, otherwise seperate calls result in each not being animated until the last is finished.
     func pieceMoved(#oldPosition: BoardPosition, newPosition: BoardPosition) {
         
@@ -92,7 +114,6 @@ class GameLayer: CCNodeColor, BoardListener {
         setSpriteAtPosition(newPosition, newSprite: movingSprite)
         let action = CCActionMoveTo.actionWithDuration(0.25, position: getViewPositionFromBoardPosition(newPosition)) as CCActionFiniteTime
         ActionManager.sharedInstance.addAction(movingSprite, action: action, isAsync: false)
-        //movingSprite.position = getViewPositionFromBoardPosition(newPosition)
     }
     
     func pieceMovedAndNewPieceCreated(#oldPosition: BoardPosition, newPosition: BoardPosition, newPiece: Piece) {
@@ -106,12 +127,12 @@ class GameLayer: CCNodeColor, BoardListener {
         setSpriteAtPosition(newPosition, newSprite: newSprite)
         
         //move sprite onto other sprite
-        movingSprite.zOrder = 100
+        movingSprite.zOrder = 10
         let movingAction = CCActionMoveTo.actionWithDuration(0.25, position: getViewPositionFromBoardPosition(newPosition)) as CCActionFiniteTime
         ActionManager.sharedInstance.addAction(movingSprite, action: movingAction, isAsync: true)
         
         //remove hidden sprite
-        let removeAction = CCActionSequence.actionOne(CCActionFadeOut.actionWithDuration(0.001) as CCActionFiniteTime, two: CCActionRemove.action() as CCActionFiniteTime) as CCActionFiniteTime
+        let removeAction = CCActionRemove.action() as CCActionFiniteTime
         ActionManager.sharedInstance.addAction(stationarySprite, action: removeAction, isAsync: true)
         
         //fade the remaining sprite out and the new one in
@@ -122,6 +143,11 @@ class GameLayer: CCNodeColor, BoardListener {
         ActionManager.sharedInstance.addAction(newSprite, action: fadeInAction, isAsync: true)
     }
     
+    func pieceDeletedAtPosition(position: BoardPosition) {
+        let spriteToRemove = getSpriteAtPosition(position)
+        spriteToRemove?.removeFromParent()
+    }
+    
     private func getSpriteAtPosition(position: BoardPosition) -> PieceSprite? {
         let arrayIndex = (position.row - 1)*Constants.numberOfColumns + (position.column - 1)
         return spriteLayout[arrayIndex]!
@@ -130,13 +156,12 @@ class GameLayer: CCNodeColor, BoardListener {
     private func setSpriteAtPosition(position: BoardPosition, newSprite: PieceSprite?) {
         let arrayIndex = (position.row - 1)*Constants.numberOfColumns + (position.column - 1)
         spriteLayout[arrayIndex] = newSprite
-        //spriteLayout.insert(newSprite, atIndex: arrayIndex)
     }
     
     //view positions are used as the position of the center of a sprite.
     private func getViewPositionFromBoardPosition(position: BoardPosition) -> CGPoint {
         let x = (Double(position.column) - 0.5)*segmentWidth
-        let y = (Double(position.row) - 0.5)*segmentHeight //+28  64 224    384x568   image 56x56
+        let y = (Double(position.row) - 0.5)*segmentHeight
         return CGPoint(x: x, y: y)
     }
     
@@ -144,6 +169,12 @@ class GameLayer: CCNodeColor, BoardListener {
         let column = Int(point.x/CGFloat(segmentWidth)) + 1
         let row = Int(point.y/CGFloat(segmentHeight)) + 1
         return BoardPosition(row: row, column: column)
-        //TODO might need to be altered based on 32 offset
+    }
+    
+    private func boardPositionIsValid(position: BoardPosition) -> Bool {
+        if position.row >= 1 && position.row <= Constants.numberOfRows && position.column >= 1 && position.column <= Constants.numberOfColumns {
+            return true
+        }
+        return false
     }
 }

@@ -11,9 +11,12 @@ import Foundation
 struct Constants {
     static let numberOfRows = 9
     static let numberOfColumns = 7
+    //static let gameLayerHeight = 412
     static let gameDataBoardLayoutKey = "gameDataBoardLayout"
-    static let gameDataKey = "gameData"
+    static let gameDataScoreKey = "gameDataScore"
+    static let gameDataKey = "/gameData"
     static let activePieceShapeKey = "activePieceShape"
     static let activePieceColorKey = "activePieceColor"
     static let specialPieceShapeKey = "specialPieceShape"
+    static let minimumHUDHeight = 34.0
 }

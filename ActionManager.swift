@@ -17,15 +17,21 @@ class ActionManager: CCNode {
         return Static.instance
     }
     
-    private var actionQueue: [(sprite: PieceSprite, action: CCActionFiniteTime, isAsync: Bool)] = []
+    private var actionQueue: [(sprite: PieceSprite?, action: CCActionFiniteTime, isAsync: Bool)] = []
     
     private override init() {
         //must use shared instance property to get singleton.
         
     }
     
-    func addAction(sprite: PieceSprite, action: CCActionFiniteTime, isAsync: Bool) {
-        let actionTuple = (sprite: sprite, action: action, isAsync: isAsync)
+    //use caution when passing nil for sprite, the action may be started more than once
+    func addAction(sprite: PieceSprite?, action: CCActionFiniteTime, isAsync: Bool) {
+        //instant actions count as automatically being done and so cannot be properly queued unless you change them by adding a delay so they don't count as instant.
+        var nonInstantAction = action
+        if nonInstantAction is CCActionInstant {
+            nonInstantAction = CCActionSequence.actionOne(CCActionDelay.actionWithDuration(0.001) as CCActionFiniteTime, two: action) as CCActionFiniteTime
+        }
+        let actionTuple = (sprite: sprite, action: nonInstantAction, isAsync: isAsync)
         actionQueue.append(actionTuple)
         checkForRunableActions()
     }
@@ -33,8 +39,12 @@ class ActionManager: CCNode {
     func checkForRunableActions() {
         var firstItem = true
         for item in actionQueue {
-            if !item.action.isDone() && item.sprite.numberOfRunningActions() == 0 && (firstItem || !item.isAsync) {
-                item.sprite.runAction(item.action)
+            if !item.action.isDone() && (item.sprite == nil || item.sprite!.numberOfRunningActions() == 0) && (firstItem || !item.isAsync) {
+                if item.sprite != nil {
+                    item.sprite!.runAction(item.action)
+                } else {
+                    runAction(item.action)
+                }
             }
             if item.isAsync {
                 break

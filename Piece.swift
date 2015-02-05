@@ -61,4 +61,8 @@ class Piece: NSObject {
     func getResultWhencombinedWithPiece(piece: Piece) -> Piece {
         assertionFailure("An instance of the Piece class has been created, only instances of it's subclasses should exist")
     }
+    
+    func getScoreValue() -> Int {
+        assertionFailure("An instance of the Piece class has been created, only instances of it's subclasses should exist")
+    }
 }

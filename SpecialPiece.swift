@@ -37,4 +37,8 @@ class SpecialPiece: Piece, NSCoding {
         let activePiece = piece as ActivePiece
         return ActivePiece(shape: self.shape, color: activePiece.color)
     }
+    
+    override func getScoreValue() -> Int {
+        return 50
+    }
 }

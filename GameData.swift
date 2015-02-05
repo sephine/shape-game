@@ -11,6 +11,7 @@ import Foundation
 class GameData: NSObject, NSCoding {
     
     var boardLayout = [Piece]()
+    var score = 0
     
     class var filePath: String {
         struct StaticPath {
@@ -33,15 +34,18 @@ class GameData: NSObject, NSCoding {
     
     required init(coder: NSCoder) {
         self.boardLayout = coder.decodeObjectForKey(Constants.gameDataBoardLayoutKey) as [Piece]
+        self.score = coder.decodeIntegerForKey(Constants.gameDataScoreKey)
         super.init()
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(boardLayout, forKey: Constants.gameDataBoardLayoutKey)
+        aCoder.encodeInteger(score, forKey: Constants.gameDataScoreKey)
     }
     
     func save() {
-        NSKeyedArchiver.archiveRootObject(self, toFile: GameData.filePath)
+        let success = NSKeyedArchiver.archiveRootObject(self, toFile: GameData.filePath)
+        let i = 0
     }
     
     class func getFilePath() -> String {
@@ -49,6 +53,7 @@ class GameData: NSObject, NSCoding {
     }
     
     class func loadInstance() -> GameData {
+        let path = filePath
         if let gameData = NSKeyedUnarchiver.unarchiveObjectWithFile(filePath) as? GameData {
             return gameData
         }
