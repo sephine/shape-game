@@ -16,7 +16,7 @@ class MainScene: CCScene {
         
         //add the launch screen image as the background so there is a seamless transition from the launch screen.
         //TODO is this showing the right resolution image?
-        let background = CCSprite.spriteWithImageNamed("Default.png") as CCSprite
+        let background = CCSprite.spriteWithImageNamed("Default.png") as! CCSprite
         background.position = CGPoint(x: size.width/2, y: size.height/2)
         self.addChild(background)
         self.scheduleOnce("makeTransition", delay: 1)

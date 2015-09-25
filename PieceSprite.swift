@@ -20,8 +20,8 @@ class PieceSprite: CCNode {
 
     class func createNewSpriteFromPiece(piece: Piece) -> PieceSprite {
         if piece is ActivePiece {
-            return ActivePieceSprite(piece: piece as ActivePiece)
+            return ActivePieceSprite(piece: piece as! ActivePiece)
         }
-        return SpecialPieceSprite(piece: piece as SpecialPiece)
+        return SpecialPieceSprite(piece: piece as! SpecialPiece)
     }
 }

@@ -19,10 +19,10 @@ class MenuLayer: CCNodeColor {
         backgroundSquare.position = CGPoint(x: size.width/2, y: size.height/2)
         backgroundSquare.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
-        let gameOverLabel = CCLabelTTF.labelWithString("Game Over", fontName: "Helvetica", fontSize: 20) as CCLabelTTF
+        let gameOverLabel = CCLabelTTF.labelWithString("Game Over", fontName: "Helvetica", fontSize: 20) as! CCLabelTTF
         gameOverLabel.color = CCColor.blueColor()
-        let resumeButton = CCButton.buttonWithTitle("Resume", fontName: "Helvetica", fontSize: 20) as CCButton
-        let resetButton = CCButton.buttonWithTitle("Reset", fontName: "Helvetica", fontSize: 20) as CCButton
+        let resumeButton = CCButton.buttonWithTitle("Resume", fontName: "Helvetica", fontSize: 20) as! CCButton
+        let resetButton = CCButton.buttonWithTitle("Reset", fontName: "Helvetica", fontSize: 20) as! CCButton
         
         let layoutBox = CCLayoutBox()
         layoutBox.position = CGPoint(x: size.width/2, y: size.height/2)
@@ -54,12 +54,12 @@ class MenuLayer: CCNodeColor {
     }
     
     func resumeButtonClicked() {
-        let scene = CCDirector.sharedDirector().runningScene as GameScene
+        let scene = CCDirector.sharedDirector().runningScene as! GameScene
         scene.resumeGame()
     }
     
     func resetButtonClicked() {
-        let scene = CCDirector.sharedDirector().runningScene as GameScene
+        let scene = CCDirector.sharedDirector().runningScene as! GameScene
         scene.resetGame()
     }
 }

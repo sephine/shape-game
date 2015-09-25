@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ActivePiece: Piece, NSCoding {
+class ActivePiece: NSObject, Piece {
     let shape: Shape
     let color: Color
     
@@ -29,28 +29,28 @@ class ActivePiece: Piece, NSCoding {
         aCoder.encodeInteger(color.rawValue, forKey: Constants.activePieceColorKey)
     }
     
-    override func canBeCombinedWithPiece(piece: Piece) -> Bool {
+    func canBeCombinedWithPiece(piece: Piece) -> Bool {
         if piece is SpecialPiece {
             return true
         } else if piece is ActivePiece {
-            return getResultIfPossibleWhenCombinedWithActivePiece(piece as ActivePiece).isPossible
+            return getResultIfPossibleWhenCombinedWithActivePiece(piece as! ActivePiece).isPossible
         }
         return false
     }
     
-    override func getResultWhencombinedWithPiece(piece: Piece) -> Piece {
+    func getResultWhencombinedWithPiece(piece: Piece) -> Piece {
         if piece is SpecialPiece {
-            let specialPiece = piece as SpecialPiece
+            let specialPiece = piece as! SpecialPiece
             return ActivePiece(shape: specialPiece.shape, color: self.color)
         }
         assert(piece is ActivePiece, "These pieces cannot be combined, before calling this method call canBeCombinedWithActivePiece to check.")
-        let isPossibleAndResult = getResultIfPossibleWhenCombinedWithActivePiece(piece as ActivePiece)
+        let isPossibleAndResult = getResultIfPossibleWhenCombinedWithActivePiece(piece as! ActivePiece)
         assert(isPossibleAndResult.isPossible, "These pieces cannot be combined, before calling this method call canBeCombinedWithActivePiece to check.")
             
         return isPossibleAndResult.result!
     }
     
-    override func getScoreValue() -> Int {
+    func getScoreValue() -> Int {
             return 10
     }
     

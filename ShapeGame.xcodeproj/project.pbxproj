@@ -65,6 +65,7 @@
 		927F61B9196C771E000F43EF /* iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F590E188484E7003F4D28 /* iPhone@2x.png */; };
 		927F61BA196C771E000F43EF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B737896D180762440076A88C /* Default.png */; };
 		927F61BB196C771E000F43EF /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
+		9619EDF11BB607160050DA8F /* PieceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9619EDF01BB607160050DA8F /* PieceFactory.swift */; };
 		B03047E91A7C47A00020CAF8 /* HUDBottomLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03047E81A7C47A00020CAF8 /* HUDBottomLayer.swift */; };
 		B047E1D71A805A9800475F31 /* MenuLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B047E1D61A805A9800475F31 /* MenuLayer.swift */; };
 		B06EB65E1A6E105C0066BA72 /* BlueSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = B06EB6571A6E105C0066BA72 /* BlueSquare.png */; };
@@ -81,7 +82,6 @@
 		B070C7FC1A6A42C700FA44A5 /* SpecialPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = B070C7F21A6A42C700FA44A5 /* SpecialPiece.swift */; };
 		B070C7FD1A6A42C700FA44A5 /* SpecialPieceSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B070C7F31A6A42C700FA44A5 /* SpecialPieceSprite.swift */; };
 		B070C7FE1A6A42C700FA44A5 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = B070C7F41A6A42C700FA44A5 /* Board.swift */; };
-		B070C7FF1A6A42C700FA44A5 /* BoardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = B070C7F51A6A42C700FA44A5 /* BoardListener.swift */; };
 		B070C8001A6A42C700FA44A5 /* BoardPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B070C7F61A6A42C700FA44A5 /* BoardPosition.swift */; };
 		B070C8011A6A42C700FA44A5 /* GameLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B070C7F71A6A42C700FA44A5 /* GameLayer.swift */; };
 		B070C8021A6A42C700FA44A5 /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = B070C7F81A6A42C700FA44A5 /* Piece.swift */; };
@@ -232,6 +232,7 @@
 		7AFCD5DD19E9BDC200BCCCDA /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "Source/Bridging-Header.h"; sourceTree = "<group>"; };
 		8392007918EE8E3300B6C429 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		927F61BF196C771E000F43EF /* ShapeGame Android.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ShapeGame Android.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9619EDF01BB607160050DA8F /* PieceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieceFactory.swift; sourceTree = "<group>"; };
 		B03047E81A7C47A00020CAF8 /* HUDBottomLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUDBottomLayer.swift; sourceTree = "<group>"; };
 		B047E1D61A805A9800475F31 /* MenuLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuLayer.swift; sourceTree = "<group>"; };
 		B06EB6571A6E105C0066BA72 /* BlueSquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueSquare.png; sourceTree = "<group>"; };
@@ -248,7 +249,6 @@
 		B070C7F21A6A42C700FA44A5 /* SpecialPiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialPiece.swift; sourceTree = "<group>"; };
 		B070C7F31A6A42C700FA44A5 /* SpecialPieceSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialPieceSprite.swift; sourceTree = "<group>"; };
 		B070C7F41A6A42C700FA44A5 /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
-		B070C7F51A6A42C700FA44A5 /* BoardListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardListener.swift; sourceTree = "<group>"; };
 		B070C7F61A6A42C700FA44A5 /* BoardPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardPosition.swift; sourceTree = "<group>"; };
 		B070C7F71A6A42C700FA44A5 /* GameLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLayer.swift; sourceTree = "<group>"; };
 		B070C7F81A6A42C700FA44A5 /* Piece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
@@ -534,6 +534,7 @@
 				B070C7F41A6A42C700FA44A5 /* Board.swift */,
 				B070C7F61A6A42C700FA44A5 /* BoardPosition.swift */,
 				B070C7F81A6A42C700FA44A5 /* Piece.swift */,
+				9619EDF01BB607160050DA8F /* PieceFactory.swift */,
 				B070C7F01A6A42C700FA44A5 /* ActivePiece.swift */,
 				B070C7F21A6A42C700FA44A5 /* SpecialPiece.swift */,
 				B07620301A7AF807000CEDE5 /* GameData.swift */,
@@ -580,7 +581,6 @@
 				B07620321A7B3EE3000CEDE5 /* HUDTopLayer.swift */,
 				B03047E81A7C47A00020CAF8 /* HUDBottomLayer.swift */,
 				B047E1D61A805A9800475F31 /* MenuLayer.swift */,
-				B070C7F51A6A42C700FA44A5 /* BoardListener.swift */,
 				B06EB6681A708FC30066BA72 /* ActionManager.swift */,
 				B070C7F91A6A42C700FA44A5 /* PieceSprite.swift */,
 				B070C7F11A6A42C700FA44A5 /* ActivePieceSprite.swift */,
@@ -1015,6 +1015,7 @@
 				7A046D7919E84ED5004C4763 /* GameScene.swift in Sources */,
 				B070C7FC1A6A42C700FA44A5 /* SpecialPiece.swift in Sources */,
 				B03047E91A7C47A00020CAF8 /* HUDBottomLayer.swift in Sources */,
+				9619EDF11BB607160050DA8F /* PieceFactory.swift in Sources */,
 				B07620311A7AF807000CEDE5 /* GameData.swift in Sources */,
 				B070C8031A6A42C700FA44A5 /* PieceSprite.swift in Sources */,
 				B07620331A7B3EE3000CEDE5 /* HUDTopLayer.swift in Sources */,
@@ -1022,7 +1023,6 @@
 				B076202F1A7AF3CB000CEDE5 /* Constants.swift in Sources */,
 				B070C7FD1A6A42C700FA44A5 /* SpecialPieceSprite.swift in Sources */,
 				B047E1D71A805A9800475F31 /* MenuLayer.swift in Sources */,
-				B070C7FF1A6A42C700FA44A5 /* BoardListener.swift in Sources */,
 				B06EB6671A6F4B000066BA72 /* MainScene.swift in Sources */,
 				B070C8021A6A42C700FA44A5 /* Piece.swift in Sources */,
 				B06EB6691A708FC40066BA72 /* ActionManager.swift in Sources */,

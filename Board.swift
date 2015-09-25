@@ -8,13 +8,23 @@
 
 import Foundation
 
+protocol BoardDelegate: class {
+    func pieceCreatedAtPosition(position: BoardPosition, piece: Piece, dropAmount: Int)
+    func pieceMoved(#oldPosition: BoardPosition, newPosition: BoardPosition)
+    func pieceMovedAndNewPieceCreated(#oldPosition: BoardPosition, newPosition: BoardPosition, newPiece: Piece)
+    func pieceDeletedAtPosition(position: BoardPosition)
+    func gameOver()
+}
+
 class Board {
     var data: GameData
-    var listener: BoardListener?
+    weak var boardDelegate: BoardDelegate?
     
-    init(listener: BoardListener) {
-        self.listener = listener
+    init() {
         data = GameData.sharedInstance
+    }
+    
+    func setUpBoard() {
         if data.boardLayout.isEmpty {
             createBoard()
         } else {
@@ -26,10 +36,10 @@ class Board {
         for row in 1...Constants.numberOfRows {
             for column in 1...Constants.numberOfColumns {
                 let position = BoardPosition(row: row, column: column)
-                listener?.pieceDeletedAtPosition(position)
-                let newPiece = Piece.createNewPiece()
+                boardDelegate?.pieceDeletedAtPosition(position)
+                let newPiece = PieceFactory.createNewPiece()
                 setPieceAtPosition(position, newPiece: newPiece)
-                listener?.pieceCreatedAtPosition(position, piece: newPiece, dropAmount: 0)
+                boardDelegate?.pieceCreatedAtPosition(position, piece: newPiece, dropAmount: 0)
             }
         }
         data.score = 0
@@ -41,9 +51,9 @@ class Board {
         for row in 1...Constants.numberOfRows {
             for column in 1...Constants.numberOfColumns {
                 let position = BoardPosition(row: row, column: column)
-                let newPiece = Piece.createNewPiece()
+                let newPiece = PieceFactory.createNewPiece()
                 newBoardLayout.append(newPiece)
-                listener?.pieceCreatedAtPosition(position, piece: newPiece, dropAmount: 0)
+                boardDelegate?.pieceCreatedAtPosition(position, piece: newPiece, dropAmount: 0)
             }
         }
         data.boardLayout = newBoardLayout
@@ -56,12 +66,10 @@ class Board {
             for column in 1...Constants.numberOfColumns {
                 let position = BoardPosition(row: row, column: column)
                 let currentPiece = getPieceAtPosition(position)
-                listener?.pieceCreatedAtPosition(position, piece: currentPiece, dropAmount: 0)
+                boardDelegate?.pieceCreatedAtPosition(position, piece: currentPiece, dropAmount: 0)
             }
         }
     }
-    
-    
     
     func canCombinePieceAtStartPositionIntoPieceAtEndPosition(#startPosition: BoardPosition, endPosition: BoardPosition) -> Bool {
         //TODO might need to check maximums now
@@ -86,7 +94,7 @@ class Board {
         //note no pieces are actually moved though there may be a graphic showing movement.
         let alteredPiece = pieceToBeAltered.getResultWhencombinedWithPiece(removedPiece)
         setPieceAtPosition(endPosition, newPiece: alteredPiece)
-        listener?.pieceMovedAndNewPieceCreated(oldPosition: startPosition, newPosition: endPosition, newPiece: alteredPiece)
+        boardDelegate?.pieceMovedAndNewPieceCreated(oldPosition: startPosition, newPosition: endPosition, newPiece: alteredPiece)
         
         data.score += alteredPiece.getScoreValue()
         
@@ -98,7 +106,7 @@ class Board {
         data.save()
         
         if !possibleMovesExist() {
-            listener?.gameOver()
+            boardDelegate?.gameOver()
         }
     }
     
@@ -136,16 +144,16 @@ class Board {
             let newPosition = BoardPosition(row: row - dropAmount, column: column)
             let movingPiece = getPieceAtPosition(oldPosition)
             setPieceAtPosition(newPosition, newPiece: movingPiece)
-            listener?.pieceMoved(oldPosition: oldPosition, newPosition: newPosition)
+            boardDelegate?.pieceMoved(oldPosition: oldPosition, newPosition: newPosition)
         }
         
         //create new pieces for the now empty spots at the top.
         for rowsFromTop in 0...(dropAmount-1) {
             let emptyPosition = BoardPosition(row: Constants.numberOfRows - rowsFromTop,
                 column: column)
-            let newPiece = Piece.createNewPiece()
+            let newPiece = PieceFactory.createNewPiece()
             setPieceAtPosition(emptyPosition, newPiece: newPiece)
-            listener?.pieceCreatedAtPosition(emptyPosition, piece: newPiece, dropAmount: dropAmount)
+            boardDelegate?.pieceCreatedAtPosition(emptyPosition, piece: newPiece, dropAmount: dropAmount)
         }
     }
     

@@ -29,7 +29,7 @@ class ActionManager: CCNode {
         //instant actions count as automatically being done and so cannot be properly queued unless you change them by adding a delay so they don't count as instant.
         var nonInstantAction = action
         if nonInstantAction is CCActionInstant {
-            nonInstantAction = CCActionSequence.actionOne(CCActionDelay.actionWithDuration(0.001) as CCActionFiniteTime, two: action) as CCActionFiniteTime
+            nonInstantAction = CCActionSequence.actionOne(CCActionDelay.actionWithDuration(0.001) as! CCActionFiniteTime, two: action) as! CCActionFiniteTime
         }
         let actionTuple = (sprite: sprite, action: nonInstantAction, isAsync: isAsync)
         actionQueue.append(actionTuple)

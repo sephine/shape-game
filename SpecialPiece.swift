@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SpecialPiece: Piece, NSCoding {
+class SpecialPiece: NSObject, Piece {
     let shape: Shape
     
     init(shape: Shape) {
@@ -25,20 +25,20 @@ class SpecialPiece: Piece, NSCoding {
         aCoder.encodeInteger(shape.rawValue, forKey: Constants.specialPieceShapeKey)
     }
     
-    override func canBeCombinedWithPiece(piece: Piece) -> Bool {
+    func canBeCombinedWithPiece(piece: Piece) -> Bool {
         if piece is ActivePiece {
             return true
         }
         return false
     }
     
-    override func getResultWhencombinedWithPiece(piece: Piece) -> Piece {
+    func getResultWhencombinedWithPiece(piece: Piece) -> Piece {
         assert(piece is ActivePiece, "These pieces cannot be combined, before calling this method call canBeCombinedWithActivePiece to check.")
-        let activePiece = piece as ActivePiece
+        let activePiece = piece as! ActivePiece
         return ActivePiece(shape: self.shape, color: activePiece.color)
     }
     
-    override func getScoreValue() -> Int {
+    func getScoreValue() -> Int {
         return 50
     }
 }

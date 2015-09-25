@@ -19,11 +19,11 @@ class SpecialPieceSprite: PieceSprite {
     private func setInnerSpriteToMatchPiece(piece: SpecialPiece) {
         switch piece.shape {
         case .Circle:
-            innerSprite = CCSprite.spriteWithImageNamed("WhiteCircle.png") as CCSprite
+            innerSprite = CCSprite.spriteWithImageNamed("WhiteCircle.png") as! CCSprite
         case .Square:
-            innerSprite = CCSprite.spriteWithImageNamed("WhiteSquare.png") as CCSprite
+            innerSprite = CCSprite.spriteWithImageNamed("WhiteSquare.png") as! CCSprite
         case .Triangle:
-            innerSprite = CCSprite.spriteWithImageNamed("WhiteTriangle.png") as CCSprite
+            innerSprite = CCSprite.spriteWithImageNamed("WhiteTriangle.png") as! CCSprite
         }
     }
 }

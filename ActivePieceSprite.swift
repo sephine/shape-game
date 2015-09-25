@@ -22,47 +22,47 @@ class ActivePieceSprite: PieceSprite {
         case .Circle:
             switch piece.color {
             case .Blue:
-                innerSprite = CCSprite.spriteWithImageNamed("BlueCircle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("BlueCircle.png") as! CCSprite
             case .Yellow:
-                innerSprite = CCSprite.spriteWithImageNamed("YellowCircle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("YellowCircle.png") as! CCSprite
             case .Red:
-                innerSprite = CCSprite.spriteWithImageNamed("RedCircle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("RedCircle.png") as! CCSprite
             case .Green:
-                innerSprite = CCSprite.spriteWithImageNamed("GreenCircle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("GreenCircle.png") as! CCSprite
             case .Purple:
-                innerSprite = CCSprite.spriteWithImageNamed("PurpleCircle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("PurpleCircle.png") as! CCSprite
             case .Orange:
-                innerSprite = CCSprite.spriteWithImageNamed("OrangeCircle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("OrangeCircle.png") as! CCSprite
             }
         case .Square:
             switch piece.color {
             case .Blue:
-                innerSprite = CCSprite.spriteWithImageNamed("BlueSquare.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("BlueSquare.png") as! CCSprite
             case .Yellow:
-                innerSprite = CCSprite.spriteWithImageNamed("YellowSquare.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("YellowSquare.png") as! CCSprite
             case .Red:
-                innerSprite = CCSprite.spriteWithImageNamed("RedSquare.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("RedSquare.png") as! CCSprite
             case .Green:
-                innerSprite = CCSprite.spriteWithImageNamed("GreenSquare.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("GreenSquare.png") as! CCSprite
             case .Purple:
-                innerSprite = CCSprite.spriteWithImageNamed("PurpleSquare.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("PurpleSquare.png") as! CCSprite
             case .Orange:
-                innerSprite = CCSprite.spriteWithImageNamed("OrangeSquare.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("OrangeSquare.png") as! CCSprite
             }
         case .Triangle:
             switch piece.color {
             case .Blue:
-                innerSprite = CCSprite.spriteWithImageNamed("BlueTriangle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("BlueTriangle.png") as! CCSprite
             case .Yellow:
-                innerSprite = CCSprite.spriteWithImageNamed("YellowTriangle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("YellowTriangle.png") as! CCSprite
             case .Red:
-                innerSprite = CCSprite.spriteWithImageNamed("RedTriangle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("RedTriangle.png") as! CCSprite
             case .Green:
-                innerSprite = CCSprite.spriteWithImageNamed("GreenTriangle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("GreenTriangle.png") as! CCSprite
             case .Purple:
-                innerSprite = CCSprite.spriteWithImageNamed("PurpleTriangle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("PurpleTriangle.png") as! CCSprite
             case .Orange:
-                innerSprite = CCSprite.spriteWithImageNamed("OrangeTriangle.png") as CCSprite
+                innerSprite = CCSprite.spriteWithImageNamed("OrangeTriangle.png") as! CCSprite
             }
         }
     }

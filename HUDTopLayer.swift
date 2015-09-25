@@ -15,7 +15,7 @@ class HUDTopLayer: CCNodeColor {
     
     init(size: CGSize) {
         displayedScore = GameData.sharedInstance.score
-        scoreLabel = CCLabelTTF.labelWithString("Score: \(displayedScore)", fontName: "Helvetica", fontSize: 20, dimensions: CGSize(width: 140, height: 24)) as CCLabelTTF
+        scoreLabel = CCLabelTTF.labelWithString("Score: \(displayedScore)", fontName: "Helvetica", fontSize: 20, dimensions: CGSize(width: 140, height: 24)) as! CCLabelTTF
         scoreLabel.position = CGPoint(x: 10, y: 5)
         scoreLabel.anchorPoint = CGPoint(x: 0, y: 0)
         scoreLabel.horizontalAlignment = CCTextAlignment.Left

@@ -8,10 +8,10 @@
 
 import Foundation
 
-class GameLayer: CCNodeColor, BoardListener {
+class GameLayer: CCNodeColor, BoardDelegate {
     
     var spriteLayout: [PieceSprite?]
-    let board: Board!
+    let board: Board
     var segmentHeight: Double
     var segmentWidth: Double
     var touchStartPosition: BoardPosition?
@@ -19,10 +19,10 @@ class GameLayer: CCNodeColor, BoardListener {
     init(size: CGSize) {
         
         spriteLayout = [PieceSprite?](count: Constants.numberOfRows*Constants.numberOfColumns, repeatedValue: nil)
-        
-        //let size = CCDirector.sharedDirector().viewSize()
+        board = Board()
         segmentHeight = Double(ceil(size.height/CGFloat(Constants.numberOfRows)*100)/100)
         segmentWidth = Double(ceil(size.width/CGFloat(Constants.numberOfColumns)*100)/100)
+        
         let backgroundColor = CCColor.grayColor()
         super.init(color: backgroundColor, width: GLfloat(size.width), height: GLfloat(size.height))
         
@@ -32,7 +32,8 @@ class GameLayer: CCNodeColor, BoardListener {
         //add so that the update method in ActionManager is called
         self.addChild(ActionManager.sharedInstance)
         
-        board = Board(listener: self)
+        board.boardDelegate = self
+        board.setUpBoard()
     }
     
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
@@ -88,9 +89,9 @@ class GameLayer: CCNodeColor, BoardListener {
     func gameOver() {
         
         let action = CCActionCallBlock.actionWithBlock({
-            let scene = CCDirector.sharedDirector().runningScene as GameScene
+            let scene = CCDirector.sharedDirector().runningScene as! GameScene
             scene.addMenuLayer(true)
-        }) as CCActionFiniteTime
+        }) as! CCActionFiniteTime
         
         ActionManager.sharedInstance.addAction(nil, action: action, isAsync: true)
     }
@@ -101,7 +102,7 @@ class GameLayer: CCNodeColor, BoardListener {
         self.addChild(newSprite)
         newSprite.position = getViewPositionFromBoardPosition(BoardPosition(row: position.row + dropAmount, column: position.column))
         if (dropAmount != 0) {
-            let action = CCActionMoveTo.actionWithDuration(0.25, position: getViewPositionFromBoardPosition(position)) as CCActionFiniteTime
+            let action = CCActionMoveTo.actionWithDuration(0.25, position: getViewPositionFromBoardPosition(position)) as! CCActionFiniteTime
             ActionManager.sharedInstance.addAction(newSprite, action: action, isAsync: false)
         }
     }
@@ -112,7 +113,7 @@ class GameLayer: CCNodeColor, BoardListener {
         let movingSprite = getSpriteAtPosition(oldPosition)!
         setSpriteAtPosition(oldPosition, newSprite: nil)
         setSpriteAtPosition(newPosition, newSprite: movingSprite)
-        let action = CCActionMoveTo.actionWithDuration(0.25, position: getViewPositionFromBoardPosition(newPosition)) as CCActionFiniteTime
+        let action = CCActionMoveTo.actionWithDuration(0.25, position: getViewPositionFromBoardPosition(newPosition)) as! CCActionFiniteTime
         ActionManager.sharedInstance.addAction(movingSprite, action: action, isAsync: false)
     }
     
@@ -128,18 +129,18 @@ class GameLayer: CCNodeColor, BoardListener {
         
         //move sprite onto other sprite
         movingSprite.zOrder = 10
-        let movingAction = CCActionMoveTo.actionWithDuration(0.25, position: getViewPositionFromBoardPosition(newPosition)) as CCActionFiniteTime
+        let movingAction = CCActionMoveTo.actionWithDuration(0.25, position: getViewPositionFromBoardPosition(newPosition)) as! CCActionFiniteTime
         ActionManager.sharedInstance.addAction(movingSprite, action: movingAction, isAsync: true)
         
         //remove hidden sprite
-        let removeAction = CCActionRemove.action() as CCActionFiniteTime
+        let removeAction = CCActionRemove.action() as! CCActionFiniteTime
         ActionManager.sharedInstance.addAction(stationarySprite, action: removeAction, isAsync: true)
         
         //fade the remaining sprite out and the new one in
-        let fadeOutAction = CCActionSequence.actionOne(CCActionFadeOut.actionWithDuration(0.125) as CCActionFiniteTime, two: CCActionRemove.action() as CCActionFiniteTime) as CCActionFiniteTime
+        let fadeOutAction = CCActionSequence.actionOne(CCActionFadeOut.actionWithDuration(0.125) as! CCActionFiniteTime, two: CCActionRemove.action() as! CCActionFiniteTime) as! CCActionFiniteTime
         ActionManager.sharedInstance.addAction(movingSprite, action: fadeOutAction, isAsync: true)
         
-        let fadeInAction = CCActionFadeIn.actionWithDuration(0.125) as CCActionFiniteTime
+        let fadeInAction = CCActionFadeIn.actionWithDuration(0.125) as! CCActionFiniteTime
         ActionManager.sharedInstance.addAction(newSprite, action: fadeInAction, isAsync: true)
     }
     

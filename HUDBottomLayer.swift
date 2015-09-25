@@ -11,7 +11,7 @@ import Foundation
 class HUDBottomLayer: CCNodeColor {
     
     init(size: CGSize) {
-        let menuButton = CCButton.buttonWithTitle("Menu", fontName: "Helvetica", fontSize: 20) as CCButton
+        let menuButton = CCButton.buttonWithTitle("Menu", fontName: "Helvetica", fontSize: 20) as! CCButton
         menuButton.position = CGPoint(x: size.width - 10, y: size.height - 5)
         menuButton.anchorPoint = CGPoint(x: 1, y: 1)
         menuButton.label.horizontalAlignment = CCTextAlignment.Right
@@ -30,7 +30,7 @@ class HUDBottomLayer: CCNodeColor {
     }
     
     func menuButtonClicked() {
-        let scene = CCDirector.sharedDirector().runningScene as GameScene
+        let scene = CCDirector.sharedDirector().runningScene as! GameScene
         scene.addMenuLayer(false)
     }
 }

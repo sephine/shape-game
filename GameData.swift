@@ -33,14 +33,14 @@ class GameData: NSObject, NSCoding {
     }
     
     required init(coder: NSCoder) {
-        self.boardLayout = coder.decodeObjectForKey(Constants.gameDataBoardLayoutKey) as [Piece]
+        self.boardLayout = coder.decodeObjectForKey(Constants.gameDataBoardLayoutKey) as! [Piece]
         self.score = coder.decodeIntegerForKey(Constants.gameDataScoreKey)
         super.init()
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(boardLayout, forKey: Constants.gameDataBoardLayoutKey)
-        aCoder.encodeInteger(score, forKey: Constants.gameDataScoreKey)
+        aCoder.encodeObject(self.boardLayout, forKey: Constants.gameDataBoardLayoutKey)
+        aCoder.encodeInteger(self.score, forKey: Constants.gameDataScoreKey)
     }
     
     func save() {
